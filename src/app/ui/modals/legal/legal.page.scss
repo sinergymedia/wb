@@ -1,0 +1,25 @@
+// TODO: extraer estilos en comun
+
+.legal-content {
+  --legal-margin: var(--app-broad-margin);
+  --legal-background: var(--app-background-shade);
+
+  --background: var(--legal-background);
+  --padding-start: var(--legal-margin);
+  --padding-end: var(--legal-margin);
+  --padding-top: var(--legal-margin);
+  --padding-bottom: var(--legal-margin);
+
+  .legal-title {
+    color: var(--ion-color-secondary);
+    margin: var(--legal-margin) 0px calc(var(--legal-margin) / 2);
+  }
+
+  .legal-text {
+    color: var(--ion-color-medium);
+    margin: calc(var(--legal-margin) / 2) 0px var(--legal-margin);
+    font-size: 14px;
+    line-height: 20px;
+    text-align: justify;
+  }
+}

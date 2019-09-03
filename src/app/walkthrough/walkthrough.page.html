@@ -1,0 +1,137 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button class="skip-walkthrough-button" fill="clear" (click)="skipWalkthrough()">skip</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content >
+  <ion-slides class="walkthrough-slides" pager="true" [options]="slidesOptions"  >
+    <ion-slide class="last-slide illustration-and-decoration-slide" *ngIf="pageData | async as data" >
+      <ion-row class="slide-inner-row">
+        <ion-col class="illustration-col">
+          <p class="swipe" >{{data.swipe}}</p>
+
+          <app-aspect-ratio [ratio]="{w:924, h:819}">
+            <app-image-shell class="illustration-image" animation="spinner" [src]="data.p1i"
+              [alt]="'walkthrough'"></app-image-shell>
+          </app-aspect-ratio>
+        </ion-col>
+        <ion-col class="decoration-col">
+          <svg class="vector-decoration" version="1.1" xmlns="https://www.w3.org/2000/svg"
+            xmlns:xlink="https://www.w3.org/1999/xlink" x="0px" y="0px" height="100px" width="100%" viewBox="0 0 64 18"
+            style="enable-background:new 0 0 64 24;" xml:space="preserve" preserveAspectRatio="none">
+            <path d="M0 0 L64 0 L64 10 Q56 24 46 12 Q34 0 26 8 Q10 22 0 8 Z" />
+          </svg>
+        </ion-col>
+        <ion-col class="info-col">
+          <ion-row class="info-outer">
+            <ion-col>
+              <div class="info-wrapper">
+                <h3 class="info-title"> <app-text-shell animation="bouncing" [data]="data.p1t"></app-text-shell></h3>
+                <p class="info-paragraph" *ngIf="stats | async as s">
+                   
+                    {{data.p1t1 + ' ' + s[0].count + ' ' + data.p1t2  + ' ' + s[1].count + ' ' + data.p1t3  }}
+                </p>
+              </div>
+            </ion-col>
+            <ion-col class="call-to-actions-wrapper">
+              <ion-button class="get-started-button" color="secondary" expand="block" (click)="skipWalkthrough()">Skip
+                Walkthrough
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+    <ion-slide class="second-slide illustration-and-decoration-slide" *ngIf="pageData | async as data" >
+      <ion-row class="slide-inner-row">
+        <ion-col class="illustration-col">
+            <p class="swipe" >{{data.swipe}}</p>
+
+          <app-aspect-ratio [ratio]="{w:1296, h:806}">
+            <app-image-shell class="illustration-image" animation="spinner" [src]="data.p2i"
+              [alt]="'walkthrough'"></app-image-shell>
+          </app-aspect-ratio>
+        </ion-col>
+        <ion-col class="decoration-col">
+          <svg class="vector-decoration" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="100px" width="100%" viewBox="0 0 64 24"
+            style="enable-background:new 0 0 64 24;" xml:space="preserve" preserveAspectRatio="none">
+            <path d="M0 0 L64 0 L64 24 Q56 24 48 16 Q34 0 22 10 Q10 22 0 8 Z" />
+          </svg>
+        </ion-col>
+        <ion-col class="info-col">
+          <div class="info-wrapper">
+            <h3 class="info-title">{{ data.p2t  }}</h3>
+            <p class="info-paragraph">
+                {{ data.p2t1 }}
+            </p>
+
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+    <ion-slide class="third-slide illustration-and-decoration-slide" *ngIf="pageData | async as data" >
+      <ion-row class="slide-inner-row">
+        <ion-col class="illustration-col">
+            <p class="swipe" >{{data.swipe}}</p>
+
+          <app-aspect-ratio [ratio]="{w:918, h:703}">
+              <app-image-shell class="illustration-image" animation="spinner" [src]="data.p3i"
+              [alt]="'walkthrough'"></app-image-shell>
+          </app-aspect-ratio>
+        </ion-col>
+        <ion-col class="decoration-col">
+          <svg class="vector-decoration" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="100px" width="100%" viewBox="0 0 64 24"
+            style="enable-background:new 0 0 64 24;" xml:space="preserve" preserveAspectRatio="none">
+            <path d="M0 0 L64 0 L64 24 Q56 24 48 16 Q34 0 22 10 Q10 22 0 8 Z" />
+          </svg>
+        </ion-col>
+        <ion-col class="info-col">
+          <div class="info-wrapper">
+            <h3 class="info-title"><br>{{ data.p3t  }}</h3>
+            <p class="info-paragraph">
+                {{ data.p3t1  }}
+            </p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+    <ion-slide class="last-slide illustration-and-decoration-slide" *ngIf="pageData | async as data" >
+      <ion-row class="slide-inner-row">
+        <ion-col class="illustration-col">
+          <app-aspect-ratio [ratio]="{w:924, h:819}">
+              <app-image-shell class="illustration-image" animation="spinner" [src]="data.p4i"
+              [alt]="'walkthrough'"></app-image-shell>
+          </app-aspect-ratio>
+        </ion-col>
+        <ion-col class="decoration-col">
+          <svg class="vector-decoration" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="100px" width="100%" viewBox="0 0 64 18"
+            style="enable-background:new 0 0 64 24;" xml:space="preserve" preserveAspectRatio="none">
+            <path d="M0 0 L64 0 L64 10 Q56 24 46 12 Q34 0 26 8 Q10 22 0 8 Z" />
+          </svg>
+        </ion-col>
+        <ion-col class="info-col">
+          <ion-row class="info-outer">
+            <ion-col>
+              <div class="info-wrapper">
+                <h4 class="info-title">{{ data.p4t  }}</h4>
+                <p class="info-paragraph">
+                    {{ data.p4t1  }}
+                </p>
+              </div>
+            </ion-col>
+            <ion-col class="call-to-actions-wrapper">
+              <ion-button class="get-started-button" color="secondary" expand="block"
+                [routerLink]="['/auth/login']">Get Started or Login
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

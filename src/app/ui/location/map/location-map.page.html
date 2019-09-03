@@ -1,0 +1,64 @@
+<ion-content>
+  <agm-map (mapClick)="close_window()" [fullscreenControl]='true' [mapTypeControl]='true' [latitude]="lat"
+    mapTypeControl="false" [longitude]="lng" [zoom]="8">
+
+    <agm-marker (markerClick)="select_marker(infoWindow)"  
+    *ngFor="let location of items"
+    [latitude]="location.lat"
+    [longitude]="location.lng"
+    [iconUrl]='{ url: "https://firebasestorage.googleapis.com/v0/b/barbogos.appspot.com/o/icons%2Fmarker.png?alt=media&token=1877eff1-544c-4d44-9413-acdca08bea47", "scaledSize": {"height": 40, "width": 20}}' >
+
+      <agm-info-window #infoWindow>
+        <div class="listing-item">
+          <ion-row class="image-row">
+            <ion-col size="12">
+              <!-- <app-image-shell [mode]="'cover'" class="add-overlay item-image" [src]="location.coverPhoto"
+                [routerLink]="['/app/locations/details', location.place_id]">
+                <app-aspect-ratio [ratio]="{w:3, h:2}">
+                  <div class="content-inside-item-image">
+                    <div class="item-icon">
+                      <app-aspect-ratio [ratio]="{w:1, h:1}">
+                        <app-image-shell [src]="location.icon" class="icon-image"></app-image-shell>
+                      </app-aspect-ratio>
+                    </div>
+                    <div class="item-cta">
+                      <span>Explore</span>
+                      <ion-icon class="cta-icon" name="arrow-round-forward"></ion-icon>
+                    </div>
+                  </div>
+                </app-aspect-ratio>
+              </app-image-shell> -->
+            </ion-col>
+          </ion-row>
+          <ion-row class="info-row">
+            <ion-col class="main-info-col">
+              <h3 class="item-name">
+                <a class="name-anchor" [routerLink]="['/app/location/listing/', location.id]">
+                  <app-text-shell animation="bouncing" [data]="location.name ">
+                  </app-text-shell>
+                </a>
+              </h3>
+              <p class="item-address">
+                <app-text-shell animation="bouncing" [data]="location.formatted_address"></app-text-shell>
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row class="stats-row">
+            <ion-col size="2" class="item-rating">
+              <span class="rating-value">
+                <app-text-shell [data]="location.rating"></app-text-shell>
+              </span>
+              <ion-icon class="stats-icon" src="./assets/svg/star.svg"></ion-icon>
+            </ion-col>
+            <ion-col size="2" class="item-reviews">
+              <!-- <span class="reviews-count">
+                <app-text-shell [data]="location.reviews.length"></app-text-shell>
+              </span> -->
+              <ion-icon class="stats-icon" src="./assets/svg/comments.svg"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </div>
+      </agm-info-window>
+    </agm-marker>
+  </agm-map>
+</ion-content>

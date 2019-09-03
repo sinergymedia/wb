@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Log In</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <notification-message></notification-message>
+  <ion-content padding class="form-content">
+      <h3>Social Login/Register</h3>
+      <google-login></google-login>
+      <facebook-login></facebook-login>
+  
+      <hr>
+      <ng-container *ngIf="webDemo === true">
+        <h3>Anonymous Login</h3>
+  
+        <!-- <button (click)="signInAnonymously()" class="button button-info">
+          <i class="fa fa-user-secret fa-lg"></i> Connect Anonymously
+        </button> -->
+  
+        <hr>
+      </ng-container>
+  
+  
+  </ion-content>

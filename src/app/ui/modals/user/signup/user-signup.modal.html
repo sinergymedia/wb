@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <i class="material-icons">close</i>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Subscribe</ion-title>
+  </ion-toolbar>
+</ion-header>
+  <ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          Subscribe to Wiscobogos
+          <p class="terms">***Please note subscription processing is in beta mode.<br>  Payments will process but your card will not be charged for the time being***<br>
+          please use the credit card images below to test billing</p>
+          <p class="terms">Subscription is billed $5 Monthly - Cancel at any time.</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-card class="welcome-card">
+      <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        </ion-card>
+  </ion-content>

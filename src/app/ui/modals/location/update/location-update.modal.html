@@ -1,0 +1,92 @@
+<form class="update-user-form ion-page" [formGroup]="updateLocationForm" (ngSubmit)="updateLocation()">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="end">
+        <ion-button (click)="dismissModal()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>Update Location</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="update-user-content">
+    <ion-row class="select-user-image-row">
+      <ion-col class="user-image-col" size="5">
+        <app-aspect-ratio [ratio]="{w: 1, h: 1}">
+          <app-image-shell [mode]="'cover'" class="user-image" animation="spinner" [src]="selectedImage"
+            [alt]="'user image'"></app-image-shell>
+        </app-aspect-ratio>
+        <ion-button class="change-image-btn" color="secondary" (click)="changeCoverImage()">
+          <ion-icon class="btn-icon" slot="icon-only" name="camera"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <section class="user-details-fields fields-section">
+      <ion-list class="inputs-list" lines="full">
+        <ion-item class="input-item">
+          <ion-label color="secondary" position="floating">Name</ion-label>
+          <ion-input type="text" formControlName="name" required></ion-input>
+        </ion-item>
+        <ion-item class="input-item">
+          <ion-label color="secondary" position="floating">Address</ion-label>
+          <ion-input type="text" formControlName="address" required></ion-input>
+        </ion-item>
+        <ion-item class="input-item">
+          <ion-label color="secondary" position="floating">Phone</ion-label>
+          <ion-input type="text" formControlName="phone" required></ion-input>
+        </ion-item>
+        <ion-item class="input-item">
+          <ion-label color="secondary" position="floating">Website</ion-label>
+          <ion-input type="text" formControlName="website" required></ion-input>
+        </ion-item>
+      </ion-list>
+    </section>
+    <section class="user-experience-fields fields-section">
+      <h5 class="section-header">Status</h5>
+      <ion-list class="radio-list" lines="full">
+        <ion-radio-group class="radio-group" formControlName="status">
+          <ion-item class="radio-item">
+            <ion-label class="radio-label">Active</ion-label>
+            <ion-radio slot="start" color="secondary" value="active"></ion-radio>
+          </ion-item>
+          <ion-item class="radio-item">
+            <ion-label class="radio-label">Draft</ion-label>
+            <ion-radio slot="start" color="secondary" value="draft"></ion-radio>
+          </ion-item>
+          <ion-item class="radio-item">
+            <ion-label class="radio-label">Suspended</ion-label>
+            <ion-radio slot="start" color="secondary" value="suspended"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </section>
+    <section class="user-experience-fields fields-section">
+      <h5 class="section-header">Active Deals</h5>
+      <ion-row class="" *ngFor="let deal of activeDeals | async; let i = index;">
+        <ion-item  lines="none">
+          <ion-label class="tag-label">{{deal.title}}</ion-label>
+        </ion-item>
+        <ion-button color="primary"   (click)="deleteDeal(deal.redeemId)">          
+          <ion-icon color="white" class="btn-icon" name="trash"></ion-icon>
+        </ion-button>
+      </ion-row>
+    </section>
+    <section class="user-experience-fields fields-section">
+        <h5 class="section-header">Available Deals</h5>
+        <ion-row class="checkbox-tags rounded-checkbox-tags" >
+          <ion-item   lines="none" class="checkbox-tag rounded-tag" *ngFor="let deal of deals | async; let i = index;" >
+            <ion-label class="tag-label">{{deal.title || 'N/A'}} {{deal.maxVal | currency: 'USD' || ''}}</ion-label>
+            <ion-checkbox formControlName="deals" (ionChange)="selectDeal(deal)" (checked)="dealChecked" ></ion-checkbox>
+          </ion-item>
+        </ion-row>
+      </section>
+  </ion-content>
+  <ion-footer>
+    <ion-row class="form-actions-wrapper">
+      <ion-col>
+        <ion-button class="submit-btn" expand="block" color="primary" type="submit" fill="solid"
+          [disabled]="!updateLocationForm.valid">UPDATE</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-footer>
+</form>

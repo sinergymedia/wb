@@ -1,0 +1,22 @@
+<div *ngIf="(user | async) || {} as user">
+
+    
+    <ion-button expand="block" color="facebook" 
+    class="button btn-social btn-google"
+
+            *ngIf="!user.uid" 
+            (tap)="facebookLogin()">
+
+        Connect with Facebook
+    </ion-button>
+
+    <div *ngIf="user.uid">
+      You're already logged in with UID: {{ user.uid }}
+
+      <button ion-button (tap)="signOut()">
+        Signout
+      </button>
+    </div>
+
+</div>
+

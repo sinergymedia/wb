@@ -1,0 +1,12 @@
+{
+  "appId": "com.barbogos.app",
+  "appName": "Wiscobogos",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    }
+  }
+}

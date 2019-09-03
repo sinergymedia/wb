@@ -1,0 +1,87 @@
+.categories-list {
+  --categories-margin: var(--app-narrow-margin);
+  --categories-radius: var(--app-fair-radius);
+  --categories-gutter: calc(var(--categories-margin) / 4);
+
+  --ion-grid-column-padding: var(--categories-gutter);
+
+  padding: calc(var(--categories-gutter) * 3);
+  height: 100%;
+  overflow: scroll;
+  align-content: flex-start;
+
+  // Hide scrollbars: https://stackoverflow.com/a/38994837/1116959
+  -ms-overflow-style: none;  // IE 10+
+  // Firefox
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: none;
+  // Safari and Chrome
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-item {
+    --category-loading-background: rgba(var(--ion-color-medium-rgb), 0.25);
+    --category-spinner-color: var(--ion-color-lightest);
+
+    app-image-shell {
+      --image-shell-loading-background: var(--category-loading-background);
+      --image-shell-spinner-color: var(--category-spinner-color);
+
+      // border-radius: var(--categories-radius);
+    }
+
+    .category-anchor {
+      height: 100%;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // Second version
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      .category-title {
+        margin: auto;
+        text-transform: uppercase;
+        color: var(--ion-color-lightest);
+        font-weight: 400;
+        font-size: 20px;
+        letter-spacing: 1px;
+        padding: 10px 24px;
+        background-color: var(--category-background, var(--ion-color-medium));
+        border-radius: var(--categories-radius);
+      }
+    }
+  }
+
+  .travel-category {
+    --category-background: #00AFFF;
+    --category-background-rgb: 0,175,255;
+    --category-loading-background: rgba(var(--category-background-rgb), .25);
+  }
+
+  .fashion-category {
+    --category-background: #cb328f;
+    --category-background-rgb: 203,50,143;
+    --category-loading-background: rgba(var(--category-background-rgb), .25);
+  }
+
+  .location-category {
+    --category-background: #ebbb00;
+    --category-background-rgb: 235,187,0;
+    --category-loading-background: rgba(var(--category-background-rgb), .25);
+  }
+
+  .deals-category {
+    --category-background: #70df70;
+    --category-background-rgb: 112,223,112;
+    --category-loading-background: rgba(var(--category-background-rgb), .25);
+  }
+
+  .real-state-category {
+    --category-background: #d9453a;
+    --category-background-rgb: 217,69,58;
+    --category-loading-background: rgba(var(--category-background-rgb), .25);
+  }
+}

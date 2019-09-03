@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <i class="material-icons">cancel</i>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Redeem {{shortDate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="redeem-deal-content">
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="user-avatar">
+        <app-image-shell class="user-avatar" animation="spinner" [src]="user?.avatar" [alt]="'notification image'">
+        </app-image-shell>
+      </div>
+      <mat-card-title>
+        <app-text-shell [data]="user?.displayName" class="no-animation"></app-text-shell>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <app-text-shell [data]="user?.email" class="no-animation"></app-text-shell>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <ion-col class="deal-info-wrapper" size="12">
+      <h5 class="location-name">
+          <app-text-shell [data]="deal.title"></app-text-shell>
+          <app-text-shell [data]="'@' + location?.name" class="no-animation"></app-text-shell>
+        </h5>
+      <p class="deal-details" *ngIf="deal?.description">
+         
+        <app-text-shell [data]="deal.description"></app-text-shell>
+            <app-text-shell [data]="'Max Value: '+ (deal?.maxVal | currency: 'USD')">
+          class="no-animation"></app-text-shell>
+      </p>
+    </ion-col>
+    <mat-card-actions>
+      <ion-button expand="block" color="secondary" (click)='redeemDeal()'>Server - Please Tap to Redeem </ion-button>
+    </mat-card-actions>
+    <em class="fine-print">
+      <app-text-shell [data]="finePrint"></app-text-shell>
+    </em>
+  </mat-card>
+</ion-content>

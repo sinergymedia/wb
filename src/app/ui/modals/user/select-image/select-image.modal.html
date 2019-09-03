@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Select or Upload an Avatar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="select-image-content">
+  <ion-row class="images-wrapper">
+    <ion-col size="4" class="image-item" *ngFor="let image of images">
+      <app-image-shell [mode]="'cover'" class="user-image" animation="spinner" [src]="avatar.link" [alt]="'avatar image'" (click)="dismissModal(avatar)">
+        <app-aspect-ratio [ratio]="{w: 1, h: 1}">
+        </app-aspect-ratio>
+      </app-image-shell>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer>
+  <app-multi-file-upload></app-multi-file-upload>
+  <ion-button *ngIf="uploadReady == true" class="submit-btn" expand="block" color="secondary" (click)="upload()" fill="solid">
+    Upload</ion-button>
+
+</ion-footer>

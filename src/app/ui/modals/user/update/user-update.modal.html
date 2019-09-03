@@ -1,0 +1,154 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <i class="material-icons">close</i>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Update User</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  class="filters-content">
+  <ion-row>
+    <ion-col class="user-image-wrapper" size="5">
+      <app-aspect-ratio [ratio]="{w: 1, h: 1}">
+        <app-image-shell class="user-image" [mode]="'cover'" animation="spinner" [src]="user.avatar"></app-image-shell>
+      </app-aspect-ratio>
+      <ion-button class="change-photo-btn" color="secondary" (click)="changePhoto()">
+        <i class="material-icons">camera</i>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <form class="update-user-form" [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
+    <ion-list class="inputs-list" lines="full">
+      <ion-item-divider>
+        <ion-label>Personal Info</ion-label>
+      </ion-item-divider>
+
+      <ion-item class="input-item">
+        <ion-label color="secondary" position="floating">First Name</ion-label>
+        <ion-input type="text" formControlName="firstName"></ion-input>
+      </ion-item>
+      <ion-item class="input-item">
+          <ion-label color="secondary" position="floating">Last Name</ion-label>
+          <ion-input type="text" formControlName="lastName"></ion-input>
+        </ion-item>
+        <ion-item class="input-item">
+            <ion-label color="secondary" position="floating">User Name</ion-label>
+            <ion-input type="text" formControlName="displayName"></ion-input>
+          </ion-item>
+          <ion-item class="input-item">
+              <ion-label color="secondary" position="floating">Phone number</ion-label>
+              <ion-input type="tel" formControlName="phone"></ion-input>
+            </ion-item>
+          <ion-item class="input-item">
+              <ion-label color="secondary" position="floating">Email</ion-label>
+              <ion-input type="email" formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item class="input-item">
+        <ion-label color="secondary" position="floating">Birthday</ion-label>
+        <ion-input readonly 
+        [liIonic4Datepicker]="datePickerObj"
+        formControlName="birthday">
+     </ion-input>      </ion-item>
+
+      <ion-item-divider>
+        <ion-label>Preferences</ion-label>
+      </ion-item-divider>
+      <ion-list class="toggle-list" lines="full">
+        <ion-item class="toggle-item">
+          <ion-label class="toggle-label">Push Notifications</ion-label>
+          <ion-toggle color="secondary" formControlName="text_notifications"></ion-toggle>
+        </ion-item>
+        <ion-item class="toggle-item">
+          <ion-label class="toggle-label">Email notifications</ion-label>
+          <ion-toggle color="secondary" formControlName="email_notifications"></ion-toggle>
+        </ion-item>
+        <ion-item class="toggle-item">
+            <ion-label class="toggle-label">Distance in Miles or Km? (default Miles)</ion-label>
+            <ion-toggle color="secondary" formControlName="measurement_units"></ion-toggle>
+          </ion-item>
+  
+      </ion-list>
+    <ion-item-divider>
+        <ion-label>Favorite Color</ion-label>
+      </ion-item-divider>
+
+    <ion-radio-group formControlName="selected_color">
+        <ion-row class="color-radio-group">
+          <ion-item class="color-radio" style="--color-radio-background: #fc6161;">
+            <app-aspect-ratio [ratio]="{w:1, h:1}">
+              <div class="color-radio-inner-wrapper">
+                <ion-label class="color-label">Red</ion-label>
+                <ion-radio value="#fc6161"></ion-radio>
+              </div>
+            </app-aspect-ratio>
+          </ion-item>
+          <ion-item class="color-radio" style="--color-radio-background: #fc9961;">
+            <app-aspect-ratio [ratio]="{w:1, h:1}">
+              <div class="color-radio-inner-wrapper">
+                <ion-radio value="#fc9961"></ion-radio>
+              </div>
+            </app-aspect-ratio>
+          </ion-item>
+          <ion-item class="color-radio" style="--color-radio-background: #fcea61;">
+            <app-aspect-ratio [ratio]="{w:1, h:1}">
+              <div class="color-radio-inner-wrapper">
+                <ion-radio value="#fcea61" disabled="true"></ion-radio>
+              </div>
+            </app-aspect-ratio>
+          </ion-item>
+          <ion-item class="color-radio" style="--color-radio-background: #affc61;">
+            <app-aspect-ratio [ratio]="{w:1, h:1}">
+              <div class="color-radio-inner-wrapper">
+                <ion-radio value="#affc61"></ion-radio>
+              </div>
+            </app-aspect-ratio>
+          </ion-item>
+          <ion-item class="color-radio" style="--color-radio-background: #61fcc5;">
+            <app-aspect-ratio [ratio]="{w:1, h:1}">
+              <div class="color-radio-inner-wrapper">
+                <ion-radio value="#61fcc5"></ion-radio>
+              </div>
+            </app-aspect-ratio>
+          </ion-item>
+          <ion-item class="color-radio" style="--color-radio-background: #fc61ad;">
+            <app-aspect-ratio [ratio]="{w:1, h:1}">
+              <div class="color-radio-inner-wrapper">
+                <ion-radio value="#fc61ad"></ion-radio>
+              </div>
+            </app-aspect-ratio>
+          </ion-item>
+          <ion-item class="color-radio" style="--color-radio-background: #b561fc;">
+            <app-aspect-ratio [ratio]="{w:1, h:1}">
+              <div class="color-radio-inner-wrapper">
+                <ion-label class="color-label">Purple</ion-label>
+                <ion-radio value="#b561fc"></ion-radio>
+              </div>
+            </app-aspect-ratio>
+          </ion-item>
+          <ion-item class="color-radio" style="--color-radio-background: #6182fc;">
+            <app-aspect-ratio [ratio]="{w:1, h:1}">
+              <div class="color-radio-inner-wrapper">
+                <ion-label class="color-label">Blue</ion-label>
+                <ion-radio value="#6182fc"></ion-radio>
+              </div>
+            </app-aspect-ratio>
+          </ion-item>
+          <ion-item class="color-radio" style="--color-radio-background: #61d1fc;">
+            <app-aspect-ratio [ratio]="{w:1, h:1}">
+              <div class="color-radio-inner-wrapper">
+                <ion-radio value="#61d1fc"></ion-radio>
+              </div>
+            </app-aspect-ratio>
+          </ion-item>
+        </ion-row>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-button expand="block" color="primary" class="submit-btn" type="submit" fill="outline"
+      [disabled]="!updateUserForm.valid">UPDATE</ion-button>
+  </form>
+</ion-content>

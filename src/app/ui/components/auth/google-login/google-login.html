@@ -1,0 +1,14 @@
+<div *ngIf="(user | async) || {} as user">
+
+    
+    <ion-button expand="block" color="google"
+    class="button btn-social btn-google"
+            *ngIf="!user.uid" 
+            (tap)="googleLogin()">
+
+        Connect with Google
+    </ion-button>
+
+
+</div>
+

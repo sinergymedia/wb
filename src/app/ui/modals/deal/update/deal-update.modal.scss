@@ -1,0 +1,62 @@
+:host {
+  --page-margin: var(--app-fair-margin);
+  --page-background: var(--app-background-shade);
+  --page-border-radius: 50%;
+}
+
+.update-user-content {
+  --background: var(--page-background);
+
+  app-image-shell.user-image {
+    --image-shell-border-radius: var(--page-border-radius);
+  }
+
+  .user-image-wrapper {
+    margin: 0px auto;
+    margin-top: var(--page-margin);
+    position: relative;
+
+    .user-image {
+      border-radius: var(--page-border-radius);
+      border: solid 3px #FFF;
+    }
+
+    .change-photo-btn {
+      position: absolute;
+      right: 0px;
+      bottom: 10px;
+      z-index: 3;
+      --border-radius: 50%;
+      width: 4ch;
+      height: 4ch;
+      --padding-start: 0px;
+      --padding-end: 0px;
+
+      .btn-icon {
+        font-size: 26px;
+      }
+    }
+  }
+
+  .update-user-form {
+
+    .inputs-list {
+      --ion-item-background: var(--page-background);
+      padding: var(--page-margin) var(--page-margin) calc(var(--page-margin) * 2);
+
+      .input-item {
+        --padding-start: 0px;
+        --padding-end: 0px;
+        --inner-padding-end: 0px;
+      }
+    }
+
+    .submit-btn {
+      margin: var(--page-margin);
+    }
+  }
+
+  .delete-btn {
+    margin: var(--page-margin);
+  }
+}

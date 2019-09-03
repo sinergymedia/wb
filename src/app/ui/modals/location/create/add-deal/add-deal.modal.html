@@ -1,0 +1,24 @@
+<form class="update-user-form ion-page" [formGroup]="updateDealsForm" (ngSubmit)="onComplete()">
+  <ion-content class="update-user-content">
+
+
+      <section class="user-experience-fields fields-section">
+          <h5 class="section-header">Available Deals</h5>
+          <ion-row class="checkbox-tags rounded-checkbox-tags" >
+            <ion-item   lines="none" class="checkbox-tag rounded-tag" *ngFor="let deal of deals | async; let i = index;" >
+              <ion-label class="tag-label">{{deal.title || 'N/A'}} {{deal.maxVal | currency: 'USD' || ''}}</ion-label>
+              <ion-checkbox formControlName="deals" (ionChange)="selectDeal(deal)" (checked)="dealChecked" ></ion-checkbox>
+            </ion-item>
+        
+          </ion-row>
+        </section>
+      
+</ion-content>
+<ion-footer>
+  <ion-row class="form-actions-wrapper">
+    <ion-col>
+      <ion-button class="delete-btn" expand="block" color="primary" fill="outline" type="submit">DONE WITH DEALS</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
+</form>

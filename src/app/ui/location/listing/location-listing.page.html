@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar class="filters-toolbar">
+    <ion-row>
+      <ion-col class="call-to-action-col">
+        <!-- <ion-button fill="clear" color="secondary" class="filters-btn"
+          (click)="showCategoryFilter = !showCategoryFilter">
+          <ion-icon slot="icon-only" name="filing"></ion-icon>
+        </ion-button> -->
+        <ion-button fill="clear" color="secondary" class="filters-btn"
+          (click)="showPriceLevelFilter = !showPriceLevelFilter">
+          <ion-icon slot="icon-only" name="pricetags"></ion-icon>
+        </ion-button>
+        <!-- <ion-button fill="clear" color="secondary" class="filters-btn"
+          (click)="showDistanceFilter = !showDistanceFilter">
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </ion-button> -->
+        <ion-button fill="clear" color="secondary" class="filters-btn" (click)="showSearchFilter = !showSearchFilter">
+          <ion-icon slot="icon-only" name="search"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="priceLevelForm.value.price || searchQuery" class="submit-btn" color="secondary"
+          (click)="clearAll()" fill="solid">Clear Filters
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+    <ion-row class="searchbar-row" align-items-center [hidden]="!showSearchFilter">
+      <ion-col>
+        <ion-searchbar class="items-searchbar" animated mode="ios" [(ngModel)]="searchQuery"
+          placeholder="Search by name..."></ion-searchbar>
+      </ion-col>
+    </ion-row>
+    <!-- <form class="update-user-form ion-page" [formGroup]="categoryForm" [hidden]="!showCategoryFilter">
+      <section class="user-experience-fields fields-section">
+        <h5 class="section-header">Filter by Deal Category</h5>
+        <ion-row class="checkbox-tags rounded-checkbox-tags">
+          <ion-item formArrayName="category" lines="none" class="checkbox-tag rounded-tag"
+            *ngFor="let category of categoryFormArray.controls; let i = index;">
+            <ion-label class="tag-label">{{category[i].name}}</ion-label>
+            <ion-checkbox [formControlName]="i"></ion-checkbox>
+          </ion-item>
+        </ion-row>
+      </section>
+    </form> -->
+    <!-- <section [hidden]="!showDistanceFilter">
+        <form [formGroup]="distanceForm">
+
+      <ion-row class="range-item-row">
+        <ion-col size="12">
+          <div class="range-header">
+            <span class="range-label">Filter by Distance</span>
+            <span class="range-value">{{ rangeForm.controls.single.value }}</span>
+          </div>
+        </ion-col>
+        <ion-col size="12">
+          <ion-range class="range-control" formControlName="single" color="secondary" pin="true" dualKnobs="false"
+            (ionChange)="searchList()" min="0" max="500" step="5" debounce="400"></ion-range>
+        </ion-col>
+      </ion-row>
+      </form>
+    </section> -->
+    <section [hidden]="!showPriceLevelFilter">
+      <form [formGroup]="priceLevelForm">
+        <ion-list class="ratings-list" lines="full">
+          <ion-item class="rating-item">
+            <ion-label class="rating-label">Filter by Price Level</ion-label>
+            <app-rating-input formControlName="price" max="5"></app-rating-input>
+          </ion-item>
+
+        </ion-list>
+      </form>
+    </section>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="location-listing-content">
+  <ion-list class="items-list" *ngIf="items?.length > 0">
+    <ion-item class="list-item" *ngFor="let item of items  | sortBy:'distance':'asc'" [hidden]="searchFilter(item)"
+      [routerLink]="['/app/location/listing/', item.id]">
+      <ion-row class="location-row">
+        <ion-col class="location-data-wrapper">
+          <div class="location-info">
+            <h3 class="location-name">
+              <app-text-shell animation="bouncing"
+                [data]="item.name   + ' (' + (item.distance | number:'1.2-2') + ' miles)' "></app-text-shell>
+            </h3>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <h3 *ngIf="items?.length == 0" class="empty-list-message">
+    No locations found for the selected filters.
+  </h3>
+</ion-content>
+<ion-footer *ngIf="user?.admin === true">
+  <ion-row class="form-actions-wrapper">
+    <ion-col>
+      <ion-button class="submit-btn" expand="block" color="secondary" (click)="openLocationCreateModal()" fill="solid">ADD LOCATION
+      </ion-button>
+
+    </ion-col>
+  </ion-row>
+</ion-footer>

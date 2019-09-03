@@ -1,0 +1,240 @@
+<ion-content class="location-details-content" *ngIf="location">
+  <ion-row class="image-row">
+    <ion-col size="12">
+      <app-image-shell *ngIf="!location?.showcaseImage" [mode]="'cover'" animation="spinner"
+        class="add-overlay showcase-image" [src]="defaultCoverPhoto">
+        <app-aspect-ratio [ratio]="{w:64, h:20}">
+          <div class="icon-wrapper">
+            <app-text-shell class="banner-details-name" [data]="location?.name"></app-text-shell>
+          </div>
+        </app-aspect-ratio>
+      </app-image-shell>
+    </ion-col>
+  </ion-row>
+  <ion-row class="description-row">
+
+    <ion-col size="12">
+      <ion-row class="details-scores location-scores">
+
+        <ion-col class="score-item location-score details-price-range">
+          <span class="price" *ngFor="let price of [].constructor(location?.priceRange)">$</span>
+          <span class="no-price" *ngFor="let price of [].constructor(5 - (location?.priceRange || 1))">$</span>
+        </ion-col>
+
+        <ion-col class="score-item location-score" *ngIf="location?.rating; let rating">
+          {{rating}}
+          <ion-icon class="score-icon" src="../../../../assets/svg/beer-rating.svg">
+          </ion-icon>
+        </ion-col>
+        <ion-col class="score-item location-score reviews-count" *ngIf="reviews">
+          <ion-icon class="score-icon" src="../../../../assets/svg/reviews.svg">
+          </ion-icon>
+          <div class="score-value">
+            <app-text-shell [data]="reviews"></app-text-shell>
+          </div>
+        </ion-col>
+        <ion-col class="links-tags score-item location-score">
+          <span class="link-wrapper">
+            <span class="link-tag">
+              <ion-button tapabble slot="icon-only" color="dark" [href]="location?.formatted_phone_number">
+                <ion-icon class="score-icon" src="../../../../assets/svg/phone.svg"></ion-icon>
+              </ion-button>
+            </span>
+          </span>
+        </ion-col>
+        <ion-col class="links-tags score-item location-score">
+          <span class="link-wrapper">
+            <span class="link-tag">
+              <ion-button tapabble slot="icon-only" color="dark" [href]="location?.website">
+                <ion-icon class="score-icon" src="../../../../assets/svg/website.svg"></ion-icon>
+              </ion-button>
+            </span>
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <div class="reviews-wrapper">
+      <h3 class="detail-title ">Deals</h3>
+
+  <!-- <div class="listing-item" *ngFor="let deal of location.activeDeals; let index = i">
+        <ion-row class="top-row">
+          <ion-col class="info-col">
+            <p class="location-description">
+              <app-text-shell class="deal-title" animation="bouncing" [data]="deal.redeemId"></app-text-shell>
+              <app-text-shell class="deal-title" animation="bouncing" [data]="deal.title"></app-text-shell>
+            </p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="bottom-row">
+          <ion-col class="redeem-col">
+            <ion-button *ngIf="deal.id" class="claim-button" expand="block" color="secondary"
+              (click)="openDealRedeemModal(deal)">
+              <span class="button-cta">Details & Redeem</span>
+              <ion-icon slot="end" name="ios-arrow-forward"></ion-icon>
+            </ion-button>
+            <ion-button *ngIf="user?.status === 'registered'" class="claim-button" expand="block" color="secondary"
+              (click)="signUp()">
+              <span class="button-cta">Subscribe</span>
+              <ion-icon slot="end" name="ios-arrow-forward"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div> -->
+      <!-- <div class="shaded" *ngFor="let deal of (location.activeDeals| filter:'id':redeemedArr) | async">
+          <!-- <div class="shaded" *ngFor="let deal of location.activeDeals"> 
+            
+              {{deal.id}}
+    </div>
+    <div class="shaded" *ngFor="let id of redeemedArr | async">
+            
+        {{id}}
+</div> -->
+
+  <div class="shaded" *ngFor="let deal of available">
+
+    <ion-row class="description-row">
+      <ion-col class="info-col">
+          <app-text-shell class="location-description center" animation="bouncing" [data]="deal?.title"></app-text-shell>
+      </ion-col>
+    </ion-row>
+    <ion-row class="bottom-row">
+      <ion-col class="redeem-col">
+          <ion-button *ngIf="user?.freedeemed === false" class="claim-button" expand="block" color="secondary"
+          (click)="openDealRedeemModal(deal)">
+          <span class="button-cta">Details & Redeem</span>
+          <ion-icon slot="end" name="ios-arrow-forward"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="user?.status === 'registered' && user?.freedeemed === true" class="claim-button" expand="block" color="secondary"
+          (click)="signUp()">
+          <span class="button-cta">Subscribe</span>
+          <ion-icon slot="end" name="ios-arrow-forward"></ion-icon>
+        </ion-button>
+
+        <div>
+          <p *ngIf="user?.freedeemed === true && user?.status === 'registered'"> You redeemed your free deal. Click subscribe to unlock all of
+            the deals!
+          </p>
+          <div *ngIf="user?.status === 'subscribed' && redeemed === false">
+            <ion-row class="expiration-countdown">
+              <span class="expiration-lead">Deal renews in:</span>
+              <app-countdown-timer class="item-countdown" fill="countdown" [end]="lastDay"
+                [units]="{from: 'day', to: 'second'}"></app-countdown-timer>
+            </ion-row>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  
+  </div>
+</div>
+<ng-container *ngIf="location?.opening_hours">
+  <hr class="details-divider">
+  <div class="open-hours-wrapper">
+    <h3 class="detail-title">Business Hours</h3>
+    <ul class="schedules-list">
+      <li class="open-hour-item" *ngFor="let days of schedule">
+          <!-- <li class="open-hour-item"> -->
+        <div class="schedule-outer">
+          <span class="schedule-day">
+            <app-text-shell [data]="days.day"></app-text-shell>
+          </span>
+          <div class="schedule-hours">
+              <span class="schedule-value">
+                <app-text-shell [data]="days.from"></app-text-shell>
+              </span>
+              <span class="schedule-separator">to</span>
+              <span class="schedule-value">
+                <app-text-shell [data]="days.to"></app-text-shell>
+              </span>
+                    </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</ng-container>
+<ng-container *ngIf="location?.formatted_address">
+
+  <div class="location-wrapper">
+    <div class="location-header">
+      <h3 class="detail-title">Address</h3>
+      <span class="location-address">
+        <app-text-shell [data]="location?.formatted_address"></app-text-shell>
+      </span>
+    </div>
+    <app-aspect-ratio *ngIf="location?.position" [ratio]="{w: 64, h: 20}" hidden>
+        <!-- <app-image-shell [src]="'https://maps.googleapis.com/maps/api/staticmap?center=' + location?.position + '&zoom=15&size=640x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xd9453a%7C' +  location?.position  + '&key=AIzaSyAQKOxkoT6CYM6jjhz3o1zH1lBr1LlgwbU'"> -->
+        <!-- </app-image-shell> -->
+      </app-aspect-ratio>
+  </div>
+  </ng-container>
+  <hr class="details-divider">
+  <div class="users-pictures-wrapper">
+    <h3 class="detail-title">User's photos</h3>
+    <ion-row class="pictures-row">
+      <ion-col class="picture-wrapper" size="2"
+        *ngFor="let picture of location?.usersPictures?.slice(0, 5); let i = index">
+        <app-aspect-ratio [ratio]="{w: 1, h: 1}">
+          <app-image-shell class="user-picture-image" [src]="picture" [alt]="'user image'"></app-image-shell>
+        </app-aspect-ratio>
+        <a class="has-more-pictures" *ngIf="i == 4 && location?.usersPictures?.length > 5">
+          <span class="pictures-count">{{ location?.usersPictures?.length - 5 }}</span>
+        </a>
+      </ion-col>
+    </ion-row>
+    <ion-button class="upload-picture-btn" color="dark" expand="block" fill="outline">Upload photo (coming soon)</ion-button>
+  </div>
+  <ng-container *ngIf="location?.reviews">
+  <hr class="details-divider">
+  <div class="reviews-wrapper">
+    <h3 class="detail-title">Reviews</h3>
+    <div class="reviews-list">
+      <div class="review-item" *ngFor="let review of location?.reviews">
+        <ion-row class="review-user">
+          <ion-col size="2" class="user-image-wrapper">
+            <app-aspect-ratio [ratio]="{w: 1, h: 1}">
+              <app-image-shell class="review-user-image" [src]="review.profile_photo_url" [alt]="'review user image'">
+              </app-image-shell>
+            </app-aspect-ratio>
+          </ion-col>
+          <ion-col class="user-brief-wrapper">
+            <h5 class="review-user-name">
+              <app-text-shell [data]="review.author_name"></app-text-shell>
+            </h5>
+            <ion-row class="details-scores user-scores">
+              <ion-col class="score-item user-score">
+                <ion-icon class="score-icon" src="../../../../assets/svg/beer.svg"></ion-icon>
+                <div class="score-value">
+                  <app-text-shell [data]="review.rating"></app-text-shell>
+                </div>
+                <span class="score-title">Rating</span>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col class="review-info-wrapper">
+            <span class="review-date">
+              <app-text-shell [data]="review.relative_time_description"></app-text-shell>
+            </span>
+          </ion-col>
+        </ion-row>
+        <p class="review-message">
+          <app-text-shell [data]="review.text" lines="5"></app-text-shell>
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<div *ngIf="!location?.reviews">
+  No reviews posted for this location. Click below to add yours now!
+</div>
+  <ion-button class="upload-picture-btn" color="dark" expand="block" fill="outline">Write Review  (coming soon)</ion-button>
+</ion-content>
+<ion-footer *ngIf="user?.admin === true">
+  <ion-row class="form-actions-wrapper">
+    <ion-col>
+      <ion-button class="submit-btn" expand="block" color="secondary" (click)="openLocationUpdateModal()" fill="solid">
+        EDIT LOCATION</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
